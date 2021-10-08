@@ -92,6 +92,7 @@ class Transaction:
             - Euro Token Amount
             - Dest Wallet
         """
+        # TODO: "2^64"?
         relevant_data = {
                 "timestamp"           : payment_data["created_on"],
                 "amount"              : payment_data["amount"],

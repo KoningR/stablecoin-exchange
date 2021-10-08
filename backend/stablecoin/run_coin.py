@@ -45,7 +45,7 @@ async def start_communities():
     configuration['keys'] = [{
         'alias': "my peer",
         'generation': u"curve25519",
-        'file': (f"/vol/keys/trustchain/ec.pem" if DOCKER else resolve_user("~/.ssh/eurotoken/trustchain/ec.pem"))
+        'file': (f"/vol/keys/trustchain/ec.pem" if DOCKER else resolve_user(".ssh/eurotoken/trustchain/ec.pem"))
         }]
     configuration['address'] = ip_address
     configuration['logger'] = {
@@ -87,7 +87,7 @@ async def start_communities():
     await rest_manager.start(ip_address, rest_port)
 
 def buildSI(ipv8, address, ipv8_port):
-    prefix = ('/vol/keys/' if DOCKER else resolve_user('~/.ssh/eurotoken/'))
+    prefix = ('/vol/keys/' if DOCKER else resolve_user('.ssh/eurotoken/'))
     bank = Tikkie(
             production=False,
 
@@ -100,7 +100,8 @@ def buildSI(ipv8, address, ipv8_port):
             production_key_path=f'{prefix}/tikkie/tikkie_key_prod',
 
             global_url="http://bagn.blokzijl.family",
-            url="/api/exchange/e2t/tikkie_callback")
+            url="/api/exchange/e2t/tikkie_callback",
+            testing=True)
 
     blockchain  = TrustChain(identity="pubkey0123456789abcdef", ipv8=ipv8, address=(address, ipv8_port) )
     persistence = InMemoryPersistence()
@@ -122,6 +123,5 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 

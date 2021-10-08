@@ -26,4 +26,5 @@ RUN chmod -R 755 /eurotoken
 USER user
 
 # CMD ["python", "-u", "run_coin.py"]
-CMD ["/bin/sh", "-c", "python -u run_coin.py >> /vol/logs/run.log 2>&1" ]
+#CMD ["/bin/sh", "-c", "python -u run_coin.py >> /vol/logs/run.log 2>&1" ]
+CMD ["sleep", "infinity"]

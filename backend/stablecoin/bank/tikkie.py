@@ -110,12 +110,12 @@ class Tikkie(Bank):
             return key
 
     def get_key(self, key):
-        # try:
-        with open(Path(key).expanduser(), 'rb') as stream:
-            api_key = stream.read()
-        return api_key.decode('utf-8').strip()
-        # except:
-        #     return None
+        try:
+            with open(Path(key).expanduser(), 'rb') as stream:
+                api_key = stream.read()
+            return api_key.decode('utf-8').strip()
+        except EnvironmentError:
+            return None
 
     def get_headers(self):
         if self.production:

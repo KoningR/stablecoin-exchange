@@ -6,7 +6,8 @@ from blockchain.ipv8.eurotoken.message import GatewayConnectMessage
 class EuroTokenCommunity(Community):
 
     # import os
-    community_id = bytes.fromhex("f0eb36102436bd55c7a3cdca93dcaefb08df0750")
+    # community_id = bytes.fromhex("f0eb36102436bd55c7a3cdca93dcaefb08df0750")
+    community_id = bytes.fromhex("f0eb36102436bd55c7a3cdca93dcaefb08df0742")
 
     def __init__(self, my_peer, endpoint, network):
         s = super().__init__(my_peer, endpoint, network)

@@ -11,7 +11,8 @@ services:
     volumes:
       # - /opt/eurotoken/database:/vol/database
       - ./backend/.local:/vol/database
-      - ~/.ssh/eurotoken:/vol/keys
+#      - ~/.ssh/eurotoken:/vol/keys
+      - ./backend/stablecoin/.ssh/eurotoken:/vol/keys
     environment:
       - DOCKER=           1
       - GATEWAY_NAME=     Demo Gateway
