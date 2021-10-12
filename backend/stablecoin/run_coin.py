@@ -21,8 +21,8 @@ from base64 import b64encode
 
 import os
 
-GATEWAY_NAME     =       os.environ.get('GATEWAY_NAME',     "Demo Gateway").strip()
-GATEWAY_HOSTNAME =       os.environ.get('GATEWAY_HOSTNAME', "develop.euro-token.nl").strip()
+GATEWAY_NAME     =       os.environ.get('GATEWAY_NAME',     "R Gateway").strip()
+GATEWAY_HOSTNAME =       os.environ.get('GATEWAY_HOSTNAME', "0.0.0.0").strip()
 GATEWAY_IP       =       os.environ.get('GATEWAY_IP',       "0.0.0.0").strip()
 RATE_E2T         = float(os.environ.get('RATE_E2T',         1.00))
 RATE_T2E         = float(os.environ.get('RATE_T2E',         1.00))
@@ -49,7 +49,7 @@ async def start_communities():
         }]
     configuration['address'] = ip_address
     configuration['logger'] = {
-            'level': "INFO",
+            'level': "DEBUG",
             }
     configuration['overlays'] = [{
         'class': 'MyTrustChainCommunity',

@@ -1,5 +1,6 @@
 __pycache__/
 .vim/
+.idea/
 backend/.local/
 backend/stablecoin/htmlcov
 backend/stablecoin/.coverage
@@ -18,6 +19,7 @@ frontend/.*.dockerfile
 frontend/.vs
 Pipfile.lock
 Pipfile
-/backend/stablecoin/.ssh/eurotoken/tikkie/abn_stablecoin_key
-/backend/stablecoin/.ssh/eurotoken/tikkie/tikkie_key_sandbox
-/backend/stablecoin/.ssh/eurotoken/trustchain/ec.pem
+backend/stablecoin/.ssh/eurotoken/tikkie/abn_stablecoin_key
+backend/stablecoin/.ssh/eurotoken/tikkie/tikkie_key_sandbox
+backend/stablecoin/.ssh/eurotoken/trustchain/ec.pem
+backend/stablecoin/.local/
