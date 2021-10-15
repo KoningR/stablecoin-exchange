@@ -30,8 +30,6 @@ filename `abn_stablecoin_key` (no file extension).
     the correct path and filename.
 6. Create the empty folder `frontend/dist`. 
 
-# TODO: Commit
-
 ## Run Without Docker
 0. Install Python 3.7, Conda or Pip, npm, and Vue.js.
 1. Use Conda or Pip to install `backend/requirements.txt`.
@@ -40,7 +38,33 @@ filename `abn_stablecoin_key` (no file extension).
 and the frontend by navigating to `frontend` and executing `npm run serve`.
 
 ## Run With Docker
-WIP
+0. Install Docker.
+1. Execute `docker-compose up` from the root of the repository.
+    - Append the `-d` parameter to execute the command in the background.
+    - Execute `docker-compose stop` to stop the containers.
+2. In another prompt, execute
+`docker exec -it -u root stablecoin-exchange_app_1 sh`
+to enter the terminal of the gateway backend container.
+3. You can now start the backend with `python run_coin.py`.
+4. In another window, enter the terminal of
+the gateway frontend container using
+`docker exec -it -u root stablecoin-exchange_proxy_1 sh`.
+5. Install npm and Node.js there by executing
+`apk add --update npm`.
+6. Enter the frontend directory using `cd vol/frontend`.
+7. Build the frontend from the source by executing
+`npm run build`. This will create a `dist` folder in
+this directory containing the static files of the webpage.
+8. Copy the contents of `dist` to `vol/static` by executing
+`cp -r dist/. ../static`.
+9. Move one folder up to `vol` using `cd ../`.
+10. Run `npm install -g serve`, then `serve -s static` or
+see the [Vue.js documentation on deployment](https://cli.vuejs.org/guide/deployment.html#general-guidelines).
+11. Connect to `localhost:8080` in an external browser.
+You should now see the GUI of the Eurotoken gateway.
+12. Optionally, install a text editor such as Nano using
+`apk update`, then `apk add nano`, for editing files
+in the containers directly.
 
 ## Trustchain Changes
 Next, we'll change the source code of the [Trustchain Superapp](https://github.com/Tribler/trustchain-superapp).
