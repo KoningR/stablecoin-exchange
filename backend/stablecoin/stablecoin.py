@@ -9,6 +9,7 @@ import json
 import math
 import copy
 import logging
+import time, threading
 
 class Response(ABC):
     pass
@@ -32,6 +33,27 @@ class StablecoinInteractor:
                 "bank" : self.bank,
                 "blockchain" : self.blockchain
                 }
+
+        # TODO: replace this polling thread with a callback webhook
+        self.timer = threading.Thread(target=self.check_payments_done)
+        self.timer.start()
+
+    def check_payments_done(self):
+        while True:
+            for pid in self.persistence.persistence:
+                transaction = self.persistence.get_payment_by_id(pid)
+                if transaction == None:
+                    continue
+
+                # Try to finish the payment
+                try:
+                    if transaction["status"] == Transaction.Status.PAYMENT_PENDING:
+                        self.CREATE_finish_payment(pid)
+                except Exception as e:
+                    print(">>>failed to finish payment", e)
+
+            time.sleep(5)
+
 
     def get_additional_post_routes(self):
         return self.bank.get_post_callback_routes() or {}
@@ -104,6 +126,9 @@ class StablecoinInteractor:
         if transaction is None:
             self.logger.info("no transaction found for id " + payment_id)
             return None
+
+        if transaction["status"] == Transaction.Status.PAYMENT_PENDING:
+            return transaction
 
         if transaction["status"] != Transaction.Status.PAYMENT_READY:
             self.logger.info("create_start_payment: Transaction in wrong state for id " + payment_id, transaction["status"])
